@@ -1,0 +1,49 @@
+<% layout('/layouts/boilerplate') %>
+    <div class="row mt-3">
+        <div class="col-8 offset-2">
+            <h1>Edit your Listing</h1>
+            <form method="post" action="/listings/<%= uplisting._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <input type="text" name="title" class="form-control" value="<%= uplisting.title %>" required>
+                    <div class="valid-feedback">Title looks good</div>  
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea name="description" cols="30" rows="10"
+                        class="form-control" required><%= uplisting.description %></textarea>
+                        <div class="invalid-feedback">Please enter a short description</div>
+                </div>
+                <div class="mb-3">
+                    Original Listing Image <br>
+                    <img src="<%= original %>" alt="">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="image">Upload New Image</label>
+                    <input type="file" name="image" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="price">Price</label>
+                    <input type="number" name="price" value="<%= uplisting.price %>" class="form-control" required>
+                    <div class="invalid-feedback">Please enter a valid price</div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label class="form-label" for="location">Location</label>
+                        <input type="text" name="location" value="<%= uplisting.location %>" class="form-control" required>
+                        <div class="invalid-feedback">Please enter the Location</div>
+                    </div>
+    
+                    <div class="mb-3 col-md-8">
+                        <label class="form-label" for="country">Country</label>
+                        <input type="text" name="country" value="<%= uplisting.country %>" class="form-control" required>
+                        <div class="invalid-feedback">Please enter the country</div>
+                    </div>
+                </div>
+                <button class="btn btn-dark edit-btn mt-3">Update</button>
+
+            </form>
+            </body>
+        </div>
+    </div>
