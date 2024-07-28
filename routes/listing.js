@@ -24,6 +24,12 @@ router.get('/',wrapAsync(async (req,res)=>{
     let allListing= await Listing.find({});
     res.render('listings/index.ejs',{allListing});
 }));
+router.get('/search',wrapAsync(async (req,res)=>{
+    let {dest}=req.query;
+    let searchResult=await Listing.find({country:dest});
+    // console.log(searchResult);
+    res.render('listings/search.ejs',{searchResult});
+}));
 //create and new route
 router.get('/new',isloggedin,(req,res)=>{
     // console.log(req.user);
@@ -45,6 +51,7 @@ router.get('/:id',wrapAsync(async (req,res)=>{
     }
     res.render('listings/show.ejs',{listing});
 }));
+
 //post request to create new listings
 router.post('/',isloggedin,upload.single('image'),validateListing,wrapAsync(async(req,res,next)=>{
         let url=req.file.path;
@@ -89,4 +96,5 @@ router.delete('/:id',isloggedin,isOwner,wrapAsync(async (req,res)=>{
     req.flash('success','Listing Deleted');
     res.redirect('/listings');
 }));
+
 module.exports=router;

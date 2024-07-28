@@ -81,6 +81,10 @@ body{
     color: #fe424d !important;
     border: none !important;
 }
+.delete-btn{
+    color: #fe424d !important;
+    border: none !important;
+}
 /* SHOW PAGE */
 .show-img{
     height: 30vh;
