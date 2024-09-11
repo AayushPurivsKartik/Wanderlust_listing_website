@@ -18,8 +18,9 @@
       </p>
     </div>
   </div>
-   
+
   <div class="btns">
+    <% if (currentuser && currentuser._id.toString() === listing.owner._id.toString()) { %>
     <a
       href="/listings/<%= listing._id %>/edit"
       class="btn btn-dark col-1 offset-3 edit-btn"
@@ -28,8 +29,9 @@
     <form method="post" action="/listings/<%= listing._id %>?_method=DELETE">
       <button class="btn btn-dark offset-5 delete-btn">Delete</button>
     </form>
+    <% } %>
   </div>
-  
+
   <div class="col-8 offset-3 mb-3">
     <hr />
     <h4>Leave a Review</h4>
@@ -92,9 +94,11 @@
           <p class="starability-result card-text" data-rating="<%= review.rating %>">
           </p>
         </div>
+        <% if (currentuser && currentuser._id.toString() === review.author._id.toString()) { %>
         <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" class="mb-3" method="post">
             <button class="btn btn-sm btn-dark">Delete</button>
         </form>
+        <% } %>
       </div>
       <% } %>
     </div>

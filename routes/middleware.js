@@ -28,10 +28,15 @@ module.exports.isOwner=async(req,res,next)=>{
     next();
 }
 module.exports.isreviewAuthor=async(req,res,next)=>{
-    let {id,reviewId}=req.params;
-    let review=await Review.findById(reviewId);
-    if(!review.author.equals(res.locals.currentuser._id)){
-        req.flash('failure','you are not the author of the review');
+    let {id,reviewID}=req.params;
+    let review=await Review.findById(reviewID);
+    if (!review) {
+        req.flash('failure', 'Review not found!');
+        return res.redirect(`/listings/${id}`);
+    }
+
+    if (!res.locals.currentuser || !review.author.equals(res.locals.currentuser._id)) {
+        req.flash('failure', 'You are not the author of the review');
         return res.redirect(`/listings/${id}`);
     }
     next();
